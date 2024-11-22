@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 fn main() {
-    let input = include_str!("../../input/2019/day08.txt").trim();
+    let input = include_str!("../../../input/2019/day08.txt").trim();
 
     println!("Part 1: {}", product(input, 25, 6));
     print_image(input, 25, 6);

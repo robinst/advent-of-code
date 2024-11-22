@@ -3,7 +3,7 @@
 use itertools::Itertools;
 
 fn main() {
-    let input = include_str!("../../input/2020/day09.txt");
+    let input = include_str!("../../../input/2020/day09.txt");
     let nums: Vec<_> = input.lines().map(|l| l.parse::<u64>().unwrap()).collect();
 
     let result = solve(&nums, 25);

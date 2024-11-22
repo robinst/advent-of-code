@@ -3,7 +3,7 @@
 use itertools::enumerate;
 
 fn main() {
-    let input = include_str!("../../input/2020/day01.txt");
+    let input = include_str!("../../../input/2020/day01.txt");
     let numbers: Vec<u64> = input
         .lines()
         .map(|line| line.parse().expect(&format!("{:?}", line)))

@@ -4,7 +4,7 @@ use num::integer::gcd;
 use std::collections::HashMap;
 
 fn main() {
-    let input = include_str!("../../input/2019/day10.txt").trim();
+    let input = include_str!("../../../input/2019/day10.txt").trim();
 
     println!("Part 1: {:?}", solve1(input));
     println!("Part 2: {:?}", solve2(input));
@@ -113,7 +113,7 @@ mod tests {
 
     #[test]
     fn test_input() {
-        let input = include_str!("../../input/2019/day10.txt").trim();
+        let input = include_str!("../../../input/2019/day10.txt").trim();
         assert_eq!(solve1(input), 344);
         assert_eq!(solve2(input), 2732);
     }

@@ -9,7 +9,7 @@ use std::{fmt, mem};
 const TILE_LENGTH: usize = 10;
 
 fn main() {
-    let input = include_str!("../../input/2020/day20.txt");
+    let input = include_str!("../../../input/2020/day20.txt");
 
     let puzzle = parse(input);
 

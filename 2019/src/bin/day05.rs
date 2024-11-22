@@ -1,7 +1,7 @@
 //! https://adventofcode.com/2019/day/5
 
 fn main() {
-    let input = include_str!("../../input/2019/day05.txt");
+    let input = include_str!("../../../input/2019/day05.txt");
     let input_prog = parse(input);
 
     // 3 wrong, 5346030 right

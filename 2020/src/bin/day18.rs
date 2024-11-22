@@ -14,7 +14,7 @@ use nom::{
 use std::str::FromStr;
 
 fn main() {
-    let input = include_str!("../../input/2020/day18.txt");
+    let input = include_str!("../../../input/2020/day18.txt");
 
     let mut one = 0;
     let mut two = 0;

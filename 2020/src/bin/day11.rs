@@ -3,7 +3,7 @@
 use reformation::Reformation;
 
 fn main() {
-    let input = include_str!("../../input/2020/day11.txt");
+    let input = include_str!("../../../input/2020/day11.txt");
     let seats = parse(input);
 
     println!("One: {}", solve(seats.clone()));

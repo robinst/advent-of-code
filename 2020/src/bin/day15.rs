@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 fn main() {
-    let input = include_str!("../../input/2020/day15.txt");
+    let input = include_str!("../../../input/2020/day15.txt");
     let numbers: Vec<_> = input
         .trim()
         .split(",")

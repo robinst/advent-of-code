@@ -4,7 +4,7 @@ use advent_of_code_2019::{Intcode, Result};
 use std::collections::HashMap;
 
 fn main() {
-    let input = include_str!("../../input/2019/day11.txt").trim();
+    let input = include_str!("../../../input/2019/day11.txt").trim();
     let code = Intcode::parse(input);
 
     let map = paint(code.clone(), 0);
@@ -83,7 +83,7 @@ mod tests {
 
     #[test]
     fn test_input() {
-        let input = include_str!("../../input/2019/day11.txt").trim();
+        let input = include_str!("../../../input/2019/day11.txt").trim();
         let code = Intcode::parse(input);
 
         assert_eq!(paint(code, 0).len(), 1964);

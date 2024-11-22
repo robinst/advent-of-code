@@ -3,7 +3,7 @@
 use std::collections::HashSet;
 
 fn main() {
-    let input = include_str!("../../input/2020/day06.txt");
+    let input = include_str!("../../../input/2020/day06.txt");
     println!("One: {}", solve(input));
     println!("Two: {}", solve2(input));
 }

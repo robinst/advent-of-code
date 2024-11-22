@@ -5,7 +5,7 @@ use regex::Regex;
 use std::collections::HashMap;
 
 fn main() {
-    let input = include_str!("../../input/2020/day19.txt");
+    let input = include_str!("../../../input/2020/day19.txt");
 
     let puzzle = parse(input);
     println!("One: {}", solve(&puzzle));

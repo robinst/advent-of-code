@@ -4,7 +4,7 @@ use reformation::Reformation;
 use std::collections::{HashMap, HashSet};
 
 fn main() {
-    let input = include_str!("../../input/2020/day16.txt");
+    let input = include_str!("../../../input/2020/day16.txt");
     let puzzle = parse(input);
 
     println!("One: {}", solve(&puzzle));

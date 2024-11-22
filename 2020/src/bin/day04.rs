@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 fn main() {
-    let input = include_str!("../../input/2020/day04.txt");
+    let input = include_str!("../../../input/2020/day04.txt");
     let strings = input.split("\n\n");
 
     let mut passports = Vec::new();

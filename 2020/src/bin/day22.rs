@@ -3,7 +3,7 @@
 use std::collections::{HashSet, LinkedList};
 
 fn main() {
-    let input = include_str!("../../input/2020/day22.txt");
+    let input = include_str!("../../../input/2020/day22.txt");
 
     let puzzle = parse(input);
 

@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 fn main() {
-    let input = include_str!("../../input/2019/day06.txt");
+    let input = include_str!("../../../input/2019/day06.txt");
     let pairs = parse(input);
     let orbits = orbits(&pairs);
 

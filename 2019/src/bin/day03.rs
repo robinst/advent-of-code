@@ -3,7 +3,7 @@
 use std::collections::HashSet;
 
 fn main() {
-    let input = include_str!("../../input/2019/day03.txt");
+    let input = include_str!("../../../input/2019/day03.txt");
     let mut lines = input.lines();
     let first = lines.next().unwrap();
     let second = lines.next().unwrap();

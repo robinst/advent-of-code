@@ -1,7 +1,7 @@
 //! https://adventofcode.com/2020/day/3
 
 fn main() {
-    let input = include_str!("../../input/2020/day03.txt");
+    let input = include_str!("../../../input/2020/day03.txt");
     let lines: Vec<_> = input.lines().map(|line| line.to_string()).collect();
 
     let first = trees(&lines, 3, 1);

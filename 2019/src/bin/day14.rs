@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 fn main() {
-    let input = include_str!("../../input/2019/day14.txt").trim();
+    let input = include_str!("../../../input/2019/day14.txt").trim();
 
     println!("Part 1: {}", solve1(input));
     println!("Part 2: {}", solve2(input));
@@ -140,7 +140,7 @@ mod tests {
 
     #[test]
     fn test_input() {
-        let s = include_str!("../../input/2019/day14.txt").trim();
+        let s = include_str!("../../../input/2019/day14.txt").trim();
 
         assert_eq!(solve1(s), 612880);
         assert_eq!(solve2(s), 2509120);

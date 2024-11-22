@@ -4,7 +4,7 @@ use reformation::Reformation;
 use std::collections::HashSet;
 
 fn main() {
-    let input = include_str!("../../input/2020/day08.txt");
+    let input = include_str!("../../../input/2020/day08.txt");
     let prog: Vec<_> = input.lines().map(|l| parse(l)).collect();
     println!("One: {}", solve(&prog));
     println!("Two: {}", solve2(prog));

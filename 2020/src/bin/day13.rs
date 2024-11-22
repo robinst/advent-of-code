@@ -3,7 +3,7 @@
 use num::integer::lcm;
 
 fn main() {
-    let input = include_str!("../../input/2020/day13.txt");
+    let input = include_str!("../../../input/2020/day13.txt");
     let (departure, buses) = parse(input);
     println!("One: {}", solve(departure, buses));
 

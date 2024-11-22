@@ -7,7 +7,7 @@ use cursive::{theme, Cursive, Printer};
 use advent_of_code_2019::{Intcode, Result};
 
 fn main() {
-    let input = include_str!("../../input/2019/day13.txt").trim();
+    let input = include_str!("../../../input/2019/day13.txt").trim();
     let mut code = Intcode::parse(input);
     code.prog[0] = 2;
 
@@ -141,7 +141,7 @@ impl Game {
 }
 
 fn play_game() -> (usize, i64) {
-    let input = include_str!("../../input/2019/day13.txt").trim();
+    let input = include_str!("../../../input/2019/day13.txt").trim();
     let mut code = Intcode::parse(input);
     code.prog[0] = 2;
     let width = 42;

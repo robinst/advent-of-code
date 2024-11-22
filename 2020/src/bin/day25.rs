@@ -1,7 +1,7 @@
 //! https://adventofcode.com/2020/day/23
 
 fn main() {
-    let input = include_str!("../../input/2020/day25.txt");
+    let input = include_str!("../../../input/2020/day25.txt");
 
     let puzzle = parse(input);
 

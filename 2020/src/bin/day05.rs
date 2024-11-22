@@ -1,7 +1,7 @@
 //! https://adventofcode.com/2020/day/5
 
 fn main() {
-    let input = include_str!("../../input/2020/day05.txt");
+    let input = include_str!("../../../input/2020/day05.txt");
     let strings: Vec<_> = input.lines().map(|l| l.to_string()).collect();
 
     let mut ids: Vec<_> = strings.iter().map(|s| seat(s)).collect();

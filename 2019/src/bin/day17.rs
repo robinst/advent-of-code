@@ -5,7 +5,7 @@ use std::collections::HashSet;
 use std::fmt;
 
 fn main() {
-    let input = include_str!("../../input/2019/day17.txt").trim();
+    let input = include_str!("../../../input/2019/day17.txt").trim();
     let code = Intcode::parse(input);
 
     print(code.clone());
@@ -191,7 +191,7 @@ mod tests {
 
     #[test]
     fn test_input() {
-        let s = include_str!("../../input/2019/day17.txt").trim();
+        let s = include_str!("../../../input/2019/day17.txt").trim();
         let code = Intcode::parse(s);
 
         assert_eq!(solve1(code), 5620);

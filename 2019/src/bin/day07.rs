@@ -3,7 +3,7 @@
 use advent_of_code_2019::{Intcode, Result};
 
 fn main() {
-    let input = include_str!("../../input/2019/day07.txt");
+    let input = include_str!("../../../input/2019/day07.txt");
 
     println!("Part 1: {}", largest_part1(input));
     println!("Part 2: {}", largest_part2(input));

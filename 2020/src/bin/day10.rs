@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 fn main() {
-    let input = include_str!("../../input/2020/day10.txt");
+    let input = include_str!("../../../input/2020/day10.txt");
     let nums: Vec<_> = input.lines().map(|l| l.parse::<u64>().unwrap()).collect();
 
     println!("One: {}", solve(&nums));

@@ -1,7 +1,7 @@
 //! https://adventofcode.com/2019/day/1
 
 fn main() {
-    let input = include_str!("../../input/2019/day01.txt");
+    let input = include_str!("../../../input/2019/day01.txt");
     let numbers: Vec<u64> = input
         .lines()
         .map(|line| line.parse().expect(&format!("{:?}", line)))

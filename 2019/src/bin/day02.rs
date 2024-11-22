@@ -1,7 +1,7 @@
 //! https://adventofcode.com/2019/day/2
 
 fn main() {
-    let input = include_str!("../../input/2019/day02.txt");
+    let input = include_str!("../../../input/2019/day02.txt");
     let input_prog: Vec<usize> = input
         .split(',')
         .map(|s| {
