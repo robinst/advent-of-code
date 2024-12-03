@@ -12,7 +12,7 @@ public class Day03 {
     static long solve1(String input) {
         var pattern = Pattern.compile("mul\\(\\d+,\\d+\\)");
         var matcher = pattern.matcher(input);
-        var result = 0L;
+        var result = 0;
         while (matcher.find()) {
             var nums = Parsing.numbers(matcher.group());
             result += nums.get(0) * nums.get(1);
@@ -24,7 +24,7 @@ public class Day03 {
         var pattern = Pattern.compile("mul\\(\\d+,\\d+\\)|do\\(\\)|don't\\(\\)");
         var matcher = pattern.matcher(input);
         var enabled = true;
-        var result = 0L;
+        var result = 0;
         while (matcher.find()) {
             var m = matcher.group();
             if (m.equals("do()")) {
