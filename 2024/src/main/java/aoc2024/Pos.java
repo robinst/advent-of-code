@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toCollection;
 
@@ -11,6 +12,13 @@ public record Pos(int x, int y) {
 
     Pos plus(Pos pos) {
         return new Pos(x + pos.x, y + pos.y);
+    }
+
+    /**
+     * A line of positions starting from this position, adding {@code step} until there are {@code length} positions.
+     */
+    List<Pos> line(Pos step, int length) {
+        return Stream.iterate(this, p -> p.plus(step)).limit(length).toList();
     }
 
     static List<Pos> allDirections() {

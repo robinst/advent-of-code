@@ -3,6 +3,8 @@ package aoc2024;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public record PosBounds(int minX, int maxX, int minY, int maxY) {
 
@@ -12,11 +14,11 @@ public record PosBounds(int minX, int maxX, int minY, int maxY) {
         int minY = Integer.MAX_VALUE;
         int maxY = Integer.MIN_VALUE;
 
-        for (Pos elf : positions) {
-            minX = Math.min(elf.x(), minX);
-            maxX = Math.max(elf.x(), maxX);
-            minY = Math.min(elf.y(), minY);
-            maxY = Math.max(elf.y(), maxY);
+        for (var pos : positions) {
+            minX = Math.min(pos.x(), minX);
+            maxX = Math.max(pos.x(), maxX);
+            minY = Math.min(pos.y(), minY);
+            maxY = Math.max(pos.y(), maxY);
         }
         return new PosBounds(minX, maxX, minY, maxY);
     }
@@ -40,6 +42,10 @@ public record PosBounds(int minX, int maxX, int minY, int maxY) {
         border.addAll(new Pos(maxX, maxY).straightLineToIncluding(new Pos(minX, maxY)));
         border.addAll(new Pos(minX, maxY).straightLineToIncluding(new Pos(minX, minY)));
         return border;
+    }
+
+    public Stream<Pos> allPositions() {
+        return IntStream.rangeClosed(minY, maxY).boxed().flatMap(y -> IntStream.rangeClosed(minX, maxX).mapToObj(x -> new Pos(x, y)));
     }
 
     public boolean contains(Pos pos) {
