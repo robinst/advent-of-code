@@ -14,6 +14,10 @@ public record Pos(int x, int y) {
         return new Pos(x + pos.x, y + pos.y);
     }
 
+    Pos minus(Pos pos) {
+        return new Pos(x - pos.x, y - pos.y);
+    }
+
     /**
      * A line of positions starting from this position, adding {@code step} until there are {@code length} positions.
      */

@@ -45,6 +45,10 @@ public class Grid<T> {
         return cells.getOrDefault(pos, defaultValue);
     }
 
+    public Map<Pos, T> cells() {
+        return cells;
+    }
+
     public PosBounds bounds() {
         return bounds;
     }
