@@ -10,15 +10,13 @@ public class Day06 {
 
     enum Cell {
         OBSTACLE,
-        START
     }
 
     static long solve1(String input) {
-        // TODO: Need a parse variant that can also return a start pos
-        var grid = Grid.parse(input, s -> s.equals("^") ? Cell.START : s.equals("#") ? Cell.OBSTACLE : null);
-        var startPos = grid.cells().entrySet().stream().filter(e -> e.getValue() == Cell.START).findFirst().get().getKey();
+        var gridWithStart = Grid.parseWithStart(input, s -> s.equals("^"), s -> s.equals("#") ? Cell.OBSTACLE : null);
+        var grid = gridWithStart.grid();
+        var startPos = gridWithStart.start();
         var direction = Direction.UP;
-        grid.cells().remove(startPos);
         return calculateRoute(grid, startPos, direction).size();
     }
 
@@ -43,8 +41,9 @@ public class Day06 {
     }
 
     static long solve2(String input) {
-        var grid = Grid.parse(input, s -> s.equals("^") ? Cell.START : s.equals("#") ? Cell.OBSTACLE : null);
-        var startPos = grid.cells().entrySet().stream().filter(e -> e.getValue() == Cell.START).findFirst().get().getKey();
+        var gridWithStart = Grid.parseWithStart(input, s -> s.equals("^"), s -> s.equals("#") ? Cell.OBSTACLE : null);
+        var grid = gridWithStart.grid();
+        var startPos = gridWithStart.start();
 
         var route = calculateRoute(grid, startPos, Direction.UP);
         var result = 0L;
