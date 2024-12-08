@@ -11,7 +11,7 @@ public class Day04 {
 
     static long solve1(String input) {
         var grid = Grid.parse(input, s -> s);
-        return grid.bounds().allPositions().mapToLong(p -> countXmas(grid, p)).sum();
+        return grid.cellBounds().allPositions().mapToLong(p -> countXmas(grid, p)).sum();
     }
 
     static long countXmas(Grid<String> grid, Pos start) {
@@ -36,7 +36,7 @@ public class Day04 {
 
     static long solve2(String input) {
         var grid = Grid.parse(input, s -> s);
-        return grid.bounds().allPositions().filter(p -> hasCross(grid, p)).count();
+        return grid.cellBounds().allPositions().filter(p -> hasCross(grid, p)).count();
     }
 
     static boolean hasCross(Grid<String> grid, Pos start) {

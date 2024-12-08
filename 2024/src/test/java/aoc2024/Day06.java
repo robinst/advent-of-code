@@ -28,7 +28,7 @@ public class Day06 {
         visited.add(pos);
         while (true) {
             var next = pos.plus(direction.pos());
-            if (!grid.bounds().contains(next)) {
+            if (!grid.cellBounds().contains(next)) {
                 break;
             }
             if (grid.getOrDefault(next, null) == Cell.OBSTACLE) {
@@ -58,7 +58,7 @@ public class Day06 {
 
     static boolean wouldLoop(Grid<Cell> grid, Pos startPos, Direction direction, Pos obstruction) {
         // TODO: Can we unify this and calculateRoute?
-        var bounds = grid.bounds();
+        var bounds = grid.cellBounds();
         var visited = new HashMap<Pos, Set<Direction>>();
         var pos = startPos;
         visited.computeIfAbsent(pos, _ -> new HashSet<>()).add(direction);

@@ -8,19 +8,28 @@ import java.util.stream.Stream;
 
 public record PosBounds(int minX, int maxX, int minY, int maxY) {
 
-    public static PosBounds calculate(Collection<Pos> positions) {
-        int minX = Integer.MAX_VALUE;
-        int maxX = Integer.MIN_VALUE;
-        int minY = Integer.MAX_VALUE;
-        int maxY = Integer.MIN_VALUE;
+    public static class Builder {
+        private int minX = Integer.MAX_VALUE;
+        private int maxX = Integer.MIN_VALUE;
+        private int minY = Integer.MAX_VALUE;
+        private int maxY = Integer.MIN_VALUE;
 
-        for (var pos : positions) {
-            minX = Math.min(pos.x(), minX);
-            maxX = Math.max(pos.x(), maxX);
-            minY = Math.min(pos.y(), minY);
-            maxY = Math.max(pos.y(), maxY);
+        public void add(int x, int y) {
+            minX = Math.min(x, minX);
+            maxX = Math.max(x, maxX);
+            minY = Math.min(y, minY);
+            maxY = Math.max(y, maxY);
         }
-        return new PosBounds(minX, maxX, minY, maxY);
+
+        public PosBounds build() {
+            return new PosBounds(minX, maxX, minY, maxY);
+        }
+    }
+
+    public static PosBounds calculate(Collection<Pos> positions) {
+        var builder = new Builder();
+        positions.forEach(p -> builder.add(p.x(), p.y()));
+        return builder.build();
     }
 
     public int size() {

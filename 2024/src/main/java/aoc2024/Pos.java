@@ -18,11 +18,19 @@ public record Pos(int x, int y) {
         return new Pos(x - pos.x, y - pos.y);
     }
 
+    Pos negate() {
+        return new Pos(-x, -y);
+    }
+
     /**
      * A line of positions starting from this position, adding {@code step} until there are {@code length} positions.
      */
     List<Pos> line(Pos step, int length) {
-        return Stream.iterate(this, p -> p.plus(step)).limit(length).toList();
+        return stream(step).limit(length).toList();
+    }
+
+    Stream<Pos> stream(Pos step) {
+        return Stream.iterate(this, p -> p.plus(step));
     }
 
     static List<Pos> allDirections() {

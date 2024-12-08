@@ -7,18 +7,19 @@ import java.util.function.Function;
 public class Grid<T> {
 
     private final Map<Pos, T> cells;
-    private final PosBounds bounds;
+    private final PosBounds cellBounds;
+    private final PosBounds gridBounds;
 
-    private Grid(Map<Pos, T> cells, PosBounds bounds) {
+    private Grid(Map<Pos, T> cells, PosBounds cellBounds, PosBounds gridBounds) {
         this.cells = cells;
-        this.bounds = bounds;
+        this.cellBounds = cellBounds;
+        this.gridBounds = gridBounds;
     }
 
     public static <T> Grid<T> parse(String input, Function<String, T> parseCell) {
-        int minX = Integer.MAX_VALUE;
-        int minY = Integer.MAX_VALUE;
-        int maxX = Integer.MIN_VALUE;
-        int maxY = Integer.MIN_VALUE;
+        var gridBounds = new PosBounds.Builder();
+        var cellBounds = new PosBounds.Builder();
+
         var map = new LinkedHashMap<Pos, T>();
         var lines = input.split("\n");
         for (int y = 0; y < lines.length; y++) {
@@ -27,18 +28,16 @@ public class Grid<T> {
             for (int x = 0; x < cells.length; x++) {
                 var cell = parseCell.apply(cells[x]);
                 if (cell != null) {
-                    minX = Math.min(minX, x);
-                    minY = Math.min(minY, y);
-                    maxX = Math.max(maxX, x);
-                    maxY = Math.max(maxY, y);
                     map.put(new Pos(x, y), cell);
+                    cellBounds.add(x, y);
                 }
+                gridBounds.add(x, y);
             }
         }
         if (map.isEmpty()) {
             throw new IllegalArgumentException("Empty grid");
         }
-        return new Grid<>(map, new PosBounds(minX, maxX, minY, maxY));
+        return new Grid<>(map, cellBounds.build(), gridBounds.build());
     }
 
     public T getOrDefault(Pos pos, T defaultValue) {
@@ -49,7 +48,17 @@ public class Grid<T> {
         return cells;
     }
 
-    public PosBounds bounds() {
-        return bounds;
+    /**
+     * The bounds of the present cell positions (not including absent cells) at the time the grid was created.
+     */
+    public PosBounds cellBounds() {
+        return cellBounds;
+    }
+
+    /**
+     * The bounds of the grid (including absent cells) at the time the grid was created.
+     */
+    public PosBounds gridBounds() {
+        return gridBounds;
     }
 }
