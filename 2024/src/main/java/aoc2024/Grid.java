@@ -2,6 +2,7 @@ package aoc2024;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class Grid<T> {
@@ -62,6 +63,10 @@ public class Grid<T> {
 
     public T getOrDefault(Pos pos, T defaultValue) {
         return cells.getOrDefault(pos, defaultValue);
+    }
+
+    public T getOrThrow(Pos pos) {
+        return Objects.requireNonNull(cells.get(pos), "No cell at " + pos);
     }
 
     public Map<Pos, T> cells() {
