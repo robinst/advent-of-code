@@ -26,6 +26,15 @@ enum Direction {
         };
     }
 
+    Direction turnLeft() {
+        return switch (this) {
+            case UP -> LEFT;
+            case RIGHT -> UP;
+            case DOWN -> RIGHT;
+            case LEFT -> DOWN;
+        };
+    }
+
     /**
      * @return possible new directions with a 90-degree turn
      */
