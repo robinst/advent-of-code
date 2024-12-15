@@ -103,16 +103,16 @@ public class Day15 {
         var moves = parseDirections(parts[1].replace("\n", ""));
         for (var move : moves) {
             System.out.println("Move " + move + " with robot at " + robot);
-            if (canMove(robot, move, grid)) {
-                var updates = new HashMap<Pos, Cell2>();
-                moveBoxes(robot, move, grid, updates);
-                grid.cells().putAll(updates);
-                robot = robot.plus(move.pos());
-                System.out.println("-> " + updates.size() + " updates");
-//                draw(grid, robot);
-            } else {
+            var updates = new HashMap<Pos, Cell2>();
+            var canMove = moveBoxes(robot, move, grid, updates);
+            if (!canMove) {
                 System.out.println("-> Can't move");
+                continue;
             }
+            grid.cells().putAll(updates);
+            robot = robot.plus(move.pos());
+            System.out.println("-> " + updates.size() + " updates");
+//                draw(grid, robot);
         }
 
         var result = 0L;
@@ -126,41 +126,14 @@ public class Day15 {
         return result;
     }
 
-    static boolean canMove(Pos start, Direction direction, Grid<Cell2> grid) {
-        var next = start.plus(direction.pos());
-        var cell = grid.getOrDefault(next, null);
-        if (cell == null) {
-            return true;
-        }
-        return switch (cell) {
-            case BoxL -> {
-                if (direction == Direction.RIGHT) {
-                    yield canMove(next.plus(direction.pos()), direction, grid);
-                } else {
-                    assert direction == Direction.UP || direction == Direction.DOWN;
-                    yield canMove(next, direction, grid) && canMove(next.plus(Direction.RIGHT.pos()), direction, grid);
-                }
-            }
-            case BoxR -> {
-                if (direction == Direction.LEFT) {
-                    yield canMove(next.plus(direction.pos()), direction, grid);
-                } else {
-                    assert direction == Direction.UP || direction == Direction.DOWN;
-                    yield canMove(next, direction, grid) && canMove(next.plus(Direction.LEFT.pos()), direction, grid);
-                }
-            }
-            case Wall -> false;
-        };
-    }
-
-    static void moveBoxes(Pos start, Direction direction, Grid<Cell2> grid, Map<Pos, Cell2> updates) {
+    static boolean moveBoxes(Pos start, Direction direction, Grid<Cell2> grid, Map<Pos, Cell2> updates) {
         var pos = start.plus(direction.pos());
         var cell = grid.getOrDefault(pos, null);
         if (cell == null) {
-            return;
+            return true;
         }
         if (cell == Cell2.Wall) {
-            throw new IllegalStateException("Trying to move a wall? Position " + start + " and " + direction);
+            return false;
         }
         if (direction == Direction.LEFT || direction == Direction.RIGHT) {
             var oldL = cell == Cell2.BoxL ? pos : pos.plus(Direction.LEFT.pos());
@@ -169,9 +142,9 @@ public class Day15 {
             var newR = oldR.plus(direction.pos());
             updates.put(newL, Cell2.BoxL);
             updates.put(newR, Cell2.BoxR);
-            moveBoxes(pos.plus(direction.pos()), direction, grid, updates);
             updates.putIfAbsent(oldL, null);
             updates.putIfAbsent(oldR, null);
+            return moveBoxes(pos.plus(direction.pos()), direction, grid, updates);
         } else {
             assert direction == Direction.UP || direction == Direction.DOWN;
             var oldL = cell == Cell2.BoxL ? pos : pos.plus(Direction.LEFT.pos());
@@ -180,13 +153,12 @@ public class Day15 {
             var newR = oldR.plus(direction.pos());
             updates.put(newL, Cell2.BoxL);
             updates.put(newR, Cell2.BoxR);
+            updates.putIfAbsent(oldL, null);
+            updates.putIfAbsent(oldR, null);
             // If there's another box without any horizontal offset, then these two calls add the same updates.
             // If there's horizontal offset, then we need both. So always doing both is just some unnecessary
             // work that could be avoided, but the result is still correct.
-            moveBoxes(oldL, direction, grid, updates);
-            moveBoxes(oldR, direction, grid, updates);
-            updates.putIfAbsent(oldL, null);
-            updates.putIfAbsent(oldR, null);
+            return moveBoxes(oldL, direction, grid, updates) && moveBoxes(oldR, direction, grid, updates);
         }
     }
 
