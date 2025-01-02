@@ -98,7 +98,7 @@ public class Day15 {
         var grid = gridWithStart.grid();
         var robot = gridWithStart.start();
 
-        draw(grid, robot);
+        print(grid, robot);
 
         var moves = parseDirections(parts[1].replace("\n", ""));
         for (var move : moves) {
@@ -162,22 +162,8 @@ public class Day15 {
         }
     }
 
-    private static void draw(Grid<Cell2> grid, Pos robot) {
-        var bounds = grid.gridBounds();
-        for (int y = bounds.minY(); y <= bounds.maxY(); y++) {
-            for (int x = bounds.minX(); x <= bounds.maxX(); x++) {
-                var pos = new Pos(x, y);
-                String s;
-                if (pos.equals(robot)) {
-                    s = "@";
-                } else {
-                    var cell = grid.getOrDefault(pos, null);
-                    s = cell == null ? "." : cell.toString();
-                }
-                System.out.print(s);
-            }
-            System.out.println();
-        }
+    static void print(Grid<Cell2> grid, Pos robot) {
+        grid.print(".", p -> p.equals(robot) ? "@" : null);
     }
 
     @Test

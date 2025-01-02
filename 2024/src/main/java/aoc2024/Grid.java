@@ -86,4 +86,23 @@ public class Grid<T> {
     public PosBounds gridBounds() {
         return gridBounds;
     }
+
+    /**
+     * Print the full grid (width/height as per {@link #gridBounds}), using {@link Object#toString()} on cells and
+     * optional special handling for certain positions.
+     */
+    public void print(String absent, /*@Nullable*/ Function<Pos, String> special) {
+        for (int y = gridBounds.minY(); y <= gridBounds.maxY(); y++) {
+            for (int x = gridBounds.minX(); x <= gridBounds.maxX(); x++) {
+                var pos = new Pos(x, y);
+                var s = special != null ? special.apply(pos) : null;
+                if (s == null) {
+                    var cell = getOrDefault(pos, null);
+                    s = cell == null ? absent : cell.toString();
+                }
+                System.out.print(s);
+            }
+            System.out.println();
+        }
+    }
 }

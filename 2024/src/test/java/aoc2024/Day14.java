@@ -52,7 +52,7 @@ public class Day14 {
             }
             System.out.println("=".repeat(width));
             System.out.println("Seconds: " + (i));
-            draw(map, width, height);
+            print(map, width, height);
             if (!previousMaps.add(map)) {
                 System.out.println("Loop!");
                 break;
@@ -60,7 +60,7 @@ public class Day14 {
         }
     }
 
-    static void draw(Map<Pos, String> map, int maxX, int maxY) {
+    static void print(Map<Pos, String> map, int maxX, int maxY) {
         for (int y = 0; y <= maxY; y++) {
             for (int x = 0; x <= maxX; x++) {
                 System.out.print(map.getOrDefault(new Pos(x, y), " "));
