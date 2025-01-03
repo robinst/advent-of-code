@@ -5,7 +5,7 @@ My solutions for https://adventofcode.com/ over the years in different languages
 
 | Year | Link to code                                       | Days |
 |-----:|----------------------------------------------------|------|
-| 2024 | [Java](2024/src/test/java/aoc2024/Day01.java)      | WIP  |
+| 2024 | [Java](2024/src/test/java/aoc2024/Day01.java)      | All  |
 | 2023 | [Java](2023/src/test/java/aoc2023/Day01.java)      | All  |
 | 2022 | [Java](2022/java/src/test/java/aoc2022/Day01.java) | All  |
 |    " | [Swift](2022/swift/Sources/AOC2022/Day01.swift)    | 1-9  |
