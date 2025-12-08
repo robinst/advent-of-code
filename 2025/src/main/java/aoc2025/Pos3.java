@@ -13,6 +13,10 @@ record Pos3(int x, int y, int z) {
                 new Pos3(x() - 1, y(), z()), new Pos3(x(), y() - 1, z()), new Pos3(x(), y(), z() - 1));
     }
 
+    public long distanceStraightLine(Pos3 other) {
+        return (long) Math.sqrt(Math.powExact((long) x() - other.x(), 2) + Math.powExact((long) y() - other.y(), 2) + Math.powExact((long) z() - other.z(), 2));
+    }
+
     public List<Pos3> straightLineToIncluding(Pos3 to) {
         if (y() == to.y() && z() == to.z()) {
             // X is changing
