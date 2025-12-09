@@ -40,16 +40,16 @@ public class Day09 {
             for (var j = i + 1; j < reds.size(); j++) {
                 var a = reds.get(i);
                 var b = reds.get(j);
-                var xDiff = (long) Math.abs(a.x() - b.x()) + 1;
-                var yDiff = (long) Math.abs(a.y() - b.y()) + 1;
-                var area = xDiff * yDiff;
+                if (a.x() == b.x() || a.y() == b.y()) {
+                    // Don't bother with lines
+                    continue;
+                }
+                var rect = PosBounds.of(a, b);
+                var area = rect.size();
                 if (area > largest) {
-                    // Check if inside
-                    // TODO: Rect method
-                    // TODO: PosBounds shrink method?
                     // Inside of rect (without border); the lines between reds can be on the border but not go through.
-                    var rect = new PosBounds(Math.min(a.x(), b.x()) + 1, Math.max(a.x(), b.x()) - 1, Math.min(a.y(), b.y()) + 1, Math.max(a.y(), b.y()) - 1);
-                    if (isInside(rect, reds)) {
+                    var inside = rect.shrink(1);
+                    if (isInside(inside, reds)) {
                         largest = area;
                     }
                 }

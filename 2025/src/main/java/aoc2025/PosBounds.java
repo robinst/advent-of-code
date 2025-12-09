@@ -8,6 +8,15 @@ import java.util.stream.Stream;
 
 public record PosBounds(int minX, int maxX, int minY, int maxY) {
 
+    public PosBounds {
+        if (minX > maxX) {
+            throw new IllegalArgumentException("minX must be <= maxX: " + minX + ", " + maxX);
+        }
+        if (minY > maxY) {
+            throw new IllegalArgumentException("minY must be <= maxY: " + minY + ", " + maxY);
+        }
+    }
+
     public static class Builder {
         private int minX = Integer.MAX_VALUE;
         private int maxX = Integer.MIN_VALUE;
@@ -24,6 +33,10 @@ public record PosBounds(int minX, int maxX, int minY, int maxY) {
         public PosBounds build() {
             return new PosBounds(minX, maxX, minY, maxY);
         }
+    }
+
+    public static PosBounds of(Pos a, Pos b) {
+        return new PosBounds(Math.min(a.x(), b.x()), Math.max(a.x(), b.x()), Math.min(a.y(), b.y()), Math.max(a.y(), b.y()));
     }
 
     public static PosBounds calculate(Collection<Pos> positions) {
@@ -44,6 +57,10 @@ public record PosBounds(int minX, int maxX, int minY, int maxY) {
         return maxY - minY + 1;
     }
 
+    public boolean contains(Pos pos) {
+        return pos.x() >= minX && pos.x() <= maxX && pos.y() >= minY && pos.y() <= maxY;
+    }
+
     public List<Pos> borderInside() {
         var border = new ArrayList<Pos>();
         border.addAll(new Pos(minX, minY).straightLineToIncluding(new Pos(maxX, minY)));
@@ -57,7 +74,10 @@ public record PosBounds(int minX, int maxX, int minY, int maxY) {
         return IntStream.rangeClosed(minY, maxY).boxed().flatMap(y -> IntStream.rangeClosed(minX, maxX).mapToObj(x -> new Pos(x, y)));
     }
 
-    public boolean contains(Pos pos) {
-        return pos.x() >= minX && pos.x() <= maxX && pos.y() >= minY && pos.y() <= maxY;
+    /**
+     * Shrink by N from all sides if possible (otherwise throws)
+     */
+    public PosBounds shrink(int n) {
+        return new PosBounds(minX + n, maxX - n, minY + n, maxY - n);
     }
 }
