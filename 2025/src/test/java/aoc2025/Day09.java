@@ -3,26 +3,26 @@ package aoc2025;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Day09 {
 
     static long solve1(String input) {
-        var positions = input.lines().map(l -> {
+        var reds = input.lines().map(l -> {
             var nums = Parsing.numbers(l);
             return new Pos(nums.get(0), nums.get(1));
         }).toList();
 
         var largest = 0L;
-        for (var i = 0; i < positions.size(); i++) {
-            for (var j = i + 1; j < positions.size(); j++) {
-                var a = positions.get(i);
-                var b = positions.get(j);
-                var xDiff = (long) Math.abs(a.x() - b.x()) + 1;
-                var yDiff = (long) Math.abs(a.y() - b.y()) + 1;
-                largest = Math.max(largest, xDiff * yDiff);
+        for (var i = 0; i < reds.size(); i++) {
+            for (var j = i + 1; j < reds.size(); j++) {
+                var a = reds.get(i);
+                var b = reds.get(j);
+                var rect = PosBounds.of(a, b);
+                largest = Math.max(largest, rect.size());
             }
         }
         return largest;
@@ -34,7 +34,6 @@ public class Day09 {
             return new Pos(nums.get(0), nums.get(1));
         }).toList();
 
-        // TODO: Improve on this by getting all rectangles (part 1), sorting by size and then find the first that's inside
         var largest = 0L;
         for (var i = 0; i < reds.size(); i++) {
             for (var j = i + 1; j < reds.size(); j++) {
@@ -54,19 +53,18 @@ public class Day09 {
                     }
                 }
             }
-            System.out.println(i);
         }
         return largest;
     }
 
     private static boolean isInside(PosBounds rect, List<Pos> reds) {
         for (var i = 0; i < reds.size(); i++) {
-            var from = reds.get(i);
-            var to = reds.get((i + 1) % reds.size());
+            var a = reds.get(i);
+            var b = reds.get((i + 1) % reds.size());
 
             // If any of the outside lines goes through our rect (not just on the border of it), that means part of the
             // rect is outside (not on red or green).
-            if (from.straightLineToIncludingStream(to).anyMatch(rect::contains)) {
+            if (rect.intersects(PosBounds.of(a, b))) {
                 return false;
             }
         }

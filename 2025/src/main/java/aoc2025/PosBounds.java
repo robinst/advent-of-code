@@ -45,8 +45,8 @@ public record PosBounds(int minX, int maxX, int minY, int maxY) {
         return builder.build();
     }
 
-    public int size() {
-        return width() * height();
+    public long size() {
+        return (long) width() * height();
     }
 
     public int width() {
@@ -59,6 +59,10 @@ public record PosBounds(int minX, int maxX, int minY, int maxY) {
 
     public boolean contains(Pos pos) {
         return pos.x() >= minX && pos.x() <= maxX && pos.y() >= minY && pos.y() <= maxY;
+    }
+
+    public boolean intersects(PosBounds that) {
+        return minX <= that.maxX && maxX >= that.minX && minY <= that.maxY && maxY >= that.minY;
     }
 
     public List<Pos> borderInside() {
