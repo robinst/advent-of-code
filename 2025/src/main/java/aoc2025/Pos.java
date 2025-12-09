@@ -59,20 +59,22 @@ public record Pos(int x, int y) {
     }
 
     List<Pos> straightLineToIncluding(Pos to) {
+        return straightLineToIncludingStream(to).toList();
+    }
+
+    Stream<Pos> straightLineToIncludingStream(Pos to) {
         if (x() == to.x()) {
             // Vertical
             var fromY = Math.min(y(), to.y());
             var toY = Math.max(y(), to.y());
             return IntStream.rangeClosed(fromY, toY)
-                    .mapToObj(y -> new Pos(x(), y))
-                    .collect(toCollection(ArrayList::new));
+                    .mapToObj(y -> new Pos(x(), y));
         } else if (y() == to.y()) {
             // Horizontal
             var fromX = Math.min(x(), to.x());
             var toX = Math.max(x(), to.x());
             return IntStream.rangeClosed(fromX, toX)
-                    .mapToObj(x -> new Pos(x, y()))
-                    .collect(toCollection(ArrayList::new));
+                    .mapToObj(x -> new Pos(x, y()));
         } else {
             throw new IllegalStateException("Not a straight line from " + this + " to " + to);
         }
