@@ -61,10 +61,11 @@ public class Day09 {
         for (var i = 0; i < reds.size(); i++) {
             var a = reds.get(i);
             var b = reds.get((i + 1) % reds.size());
+            var line = PosBounds.of(a, b);
 
             // If any of the outside lines goes through our rect (not just on the border of it), that means part of the
             // rect is outside (not on red or green).
-            if (rect.intersects(PosBounds.of(a, b))) {
+            if (line.intersects(rect)) {
                 return false;
             }
         }
